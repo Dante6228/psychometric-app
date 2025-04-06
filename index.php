@@ -14,12 +14,9 @@
         <div class="conexion">
             <?php
                 require_once __DIR__ . '/php/conexion.php';
-                try {
-                    $conexion = new Conexion();
-                    $conexion->connection();
+                $conexion = new Conexion();
+                if ($conexion->connection()) {
                     echo "<p class='text-green-600 font-medium'>✔ Conexión exitosa a la base de datos</p>";
-                } catch (Exception $e) {
-                    echo "<p class='text-red-600 font-medium'>✖ Error al conectar: " . $e->getMessage() . "</p>";
                 }
             ?>
         </div>
@@ -32,6 +29,7 @@
         <section class="bg-white p-6 rounded-xl shadow-md w-full">
             <h2 class="font-semibold text-xl mb-2">Correr Tailwind:</h2>
             <code class="bg-gray-100 p-2 block rounded text-sm mb-2">npx tailwindcss -i ./styles/input.css -o ./styles/output.css --watch</code>
+            <p class="text-center">Después de ejecutar ese comando en terminal, recargar la página con ctrl + shift + r</p>
         </section>
     </main>
     
