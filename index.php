@@ -32,8 +32,6 @@
         <section class="bg-white p-6 rounded-xl shadow-md w-full">
             <h2 class="font-semibold text-xl mb-2">Correr Tailwind:</h2>
             <code class="bg-gray-100 p-2 block rounded text-sm mb-2">npx tailwindcss -i ./styles/input.css -o ./styles/output.css --watch</code>
-            <h3 class="mt-4 font-medium">Inicializar configuración:</h3>
-            <code class="bg-gray-100 p-2 block rounded text-sm">npx tailwindcss init</code>
         </section>
     </main>
     
