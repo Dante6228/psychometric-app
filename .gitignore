@@ -1,0 +1,30 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# Tailwind output CSS (porque se genera automáticamente)
+styles/output.css
+
+# Docker
+**/mysql_data/
+**/docker-entrypoint-initdb.d/
+*.pid
+
+# Logs y archivos temporales
+*.log
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Composer
+vendor/
+composer.lock
+
+# Archivos de build
+dist/
