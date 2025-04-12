@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../php/conexion.php';
 
 $validMessages = ['errPss', 'errEmail', 'errPost', 'login'];
 $message = (isset($_GET['message']) && in_array($_GET['message'], $validMessages)) ? $_GET['message'] : null;

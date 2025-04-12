@@ -30,8 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['correo'] = $usuario['correo'];
             $_SESSION['contraseña'] = $usuario['contraseña'];
 
-            header("Location: ../../web/welcome/dashboard.php?message=login");
-            exit();
+            if ($usuario['tipo_usuario'] === 'administrador') {
+                header("Location: ../../web/welcome/dashboard.php");
+                exit();
+            } else {
+                header("Location: ../../web/welcome/test.php");
+                exit();
+            }
+
         } else {
             header("Location: ../../web/user/index.php?message=errPss");
             exit();

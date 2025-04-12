@@ -5,66 +5,59 @@ USE psychometric_app;
 
 -- Tabla de usuarios generales
 CREATE TABLE usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    correo VARCHAR(100) UNIQUE NOT NULL,
-    contraseña VARCHAR(255) NOT NULL,
-    tipo_usuario ENUM('alumno', 'administrativo') NOT NULL,
-    fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP
+    email VARCHAR(100) NOT NULL UNIQUE,
+    contraseña_hash VARCHAR(255) NOT NULL,
+    tipo ENUM('administrativo', 'alumno') NOT NULL
 );
 
--- Tabla de alumnos (relacionada a usuarios)
-CREATE TABLE alumnos (
-    id INT PRIMARY KEY,
-    ciclo_escolar VARCHAR(50),
-    estado_aceptacion BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (id) REFERENCES usuarios(id) ON DELETE CASCADE
+-- Tabla de tests
+CREATE TABLE tests (
+    id_test INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_test VARCHAR(50) NOT NULL DEFAULT 'CLEAVER'
 );
 
 -- Tabla de preguntas del test
 CREATE TABLE preguntas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    contenido TEXT NOT NULL,
-    grupo CHAR(1) CHECK (grupo IN ('A', 'B', 'C', 'D')),
-    orden INT NOT NULL
+    id_pregunta INT AUTO_INCREMENT PRIMARY KEY,
+    id_test INT NOT NULL,
+    texto_pregunta VARCHAR(255) NOT NULL,
+    factor_disc ENUM('D', 'I', 'S', 'C') NOT NULL,
+    grupo_preguntas INT,
+    FOREIGN KEY (id_test) REFERENCES tests(id_test)
 );
 
 -- Tabla de respuestas del test por alumno
-CREATE TABLE respuestas_test (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    alumno_id INT,
-    pregunta_id INT,
-    respuesta_valor INT CHECK (respuesta_valor BETWEEN 1 AND 5),
-    FOREIGN KEY (alumno_id) REFERENCES alumnos(id) ON DELETE CASCADE,
-    FOREIGN KEY (pregunta_id) REFERENCES preguntas(id) ON DELETE CASCADE
+CREATE TABLE respuestas (
+    id_respuesta INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    id_pregunta INT NOT NULL,
+    mas BOOLEAN DEFAULT FALSE,
+    menos BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregunta),
+    UNIQUE KEY (id_usuario, id_pregunta)
 );
 
--- Tabla que define el perfil ideal para cada grupo
-CREATE TABLE perfil_ideal (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    grupo CHAR(1) CHECK (grupo IN ('A', 'B', 'C', 'D')),
-    valor_esperado INT NOT NULL CHECK (valor_esperado >= 0)
+-- Tabla de resultados DISC calculados
+CREATE TABLE resultados_disc (
+    id_resultado INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    d_total INT,
+    i_total INT,
+    s_total INT,
+    c_total INT,
+    cumple_perfil BOOLEAN,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- Tabla con los resultados por grupo para cada alumno
-CREATE TABLE resultados (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    alumno_id INT,
-    grupo CHAR(1) CHECK (grupo IN ('A', 'B', 'C', 'D')),
-    puntuacion INT NOT NULL,
-    cumple_perfil BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (alumno_id) REFERENCES alumnos(id) ON DELETE CASCADE
+INSERT INTO tests (nombre_test) VALUES ('CLEAVER');
+
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo) VALUES (
+1, 'Dante', 'dantealejandro35@gmail.com', '$2y$10$Is8ZLcP6WMCH/Jv1242grOR9hCQFEJcBo32TbZE/g.mZo7M94DwXm', 'administrativo'
 );
 
--- Tabla para interpretar resultados con baremo
-CREATE TABLE baremo (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    grupo CHAR(1) CHECK (grupo IN ('A', 'B', 'C', 'D')),
-    rango_min INT NOT NULL,
-    rango_max INT NOT NULL,
-    interpretacion TEXT NOT NULL
-);
-
-INSERT INTO usuarios (id, nombre, correo, contraseña, tipo_usuario, fecha_registro) VALUES (
-1, 'Dante', 'dantealejandro35@gmail.com', '$2y$10$Is8ZLcP6WMCH/Jv1242grOR9hCQFEJcBo32TbZE/g.mZo7M94DwXm', 'administrativo', '2023-10-01 12:00:00'
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo) VALUES (
+2, 'Alumno', 'alumno@gmail.com', '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq', 'alumno'
 );
