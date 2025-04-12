@@ -31,7 +31,7 @@ if ($message) {
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="selection:bg-slate-200">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,13 +46,13 @@ if ($message) {
         <form action="../../php/user/procesar.php" method="POST" class="flex flex-col gap-4">
             <div>
                 <label for="email" class="block text-sm font-medium">Correo electrónico</label>
-                <input type="email" id="email" name="email" required class="mt-1 border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring focus:border-green-400" placeholder="tucorreo@email.com">
+                <input type="email" id="email" name="email" required class="mt-1 border border-soft-grey rounded-md p-2 w-full focus:outline-none focus:border-slate-950 focus:border-1" placeholder="tucorreo@email.com">
             </div>
             <div>
                 <label for="password" class="block text-sm font-medium">Contraseña</label>
-                <input type="password" id="password" name="password" required class="mt-1 border border-gray-300 rounded-md p-2 w-full focus:outline-none focus:ring focus:border-green-400" placeholder="********">
+                <input type="password" id="password" name="password" required class="mt-1 border border-soft-grey rounded-md p-2 w-full focus:outline-none focus:border-slate-950 focus:border-1" placeholder="********">
             </div>
-            <button type="submit" class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition-all">Entrar</button>
+            <button type="submit" class="bg-soft-blue text-white p-2 rounded-md hover:bg-blue-600 transition-all duration-200">Entrar</button>
         </form>
     </div>
 
