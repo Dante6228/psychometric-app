@@ -1,4 +1,5 @@
 -- Crear la base de datos
+DROP DATABASE IF EXISTS psychometric_app;
 CREATE DATABASE IF NOT EXISTS psychometric_app CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE psychometric_app;
 
@@ -62,4 +63,8 @@ CREATE TABLE baremo (
     rango_min INT NOT NULL,
     rango_max INT NOT NULL,
     interpretacion TEXT NOT NULL
+);
+
+INSERT INTO usuarios (id, nombre, correo, contraseña, tipo_usuario, fecha_registro) VALUES (
+1, 'Dante', 'dantealejandro35@gmail.com', '$2y$10$Is8ZLcP6WMCH/Jv1242grOR9hCQFEJcBo32TbZE/g.mZo7M94DwXm', 'administrativo', '2023-10-01 12:00:00'
 );
