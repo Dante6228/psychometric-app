@@ -39,7 +39,7 @@ if ($message) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Iniciar sesión</title>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="bg-soft-white flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
         <h1 class="text-3xl font-bold text-center mb-6">Iniciar sesión</h1>
 
