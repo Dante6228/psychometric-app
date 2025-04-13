@@ -173,59 +173,41 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Pacifico', 'D', 18),
 (1, 'Positivo', 'C', 18),
 
--- Grupo 5
-(1, 'Aventurero', 'D', 5),
-(1, 'Receptivo', 'S', 5),
-(1, 'Cordial', 'I', 5),
-(1, 'Moderado', 'C', 5),
-
--- Grupo 8
-(1, 'Indulgente', 'S', 8),
-(1, 'Esteta', 'C', 8),
-(1, 'Vigoroso', 'D', 8),
-(1, 'Sociable', 'I', 8),
-
--- Grupo 12
-(1, 'Parlanchín', 'I', 12),
-(1, 'Controlado', 'C', 12),
-(1, 'Convencional', 'S', 12),
-(1, 'Decisivo', 'D', 12),
-
--- Grupo 14
-(1, 'Generoso', 'S', 14),
-(1, 'Persistente', 'D', 14),
-(1, 'Indiferente', 'C', 14),
-(1, 'Sangre Liviana', 'I', 14),
-
--- Grupo 16
-(1, 'Cohibido', 'C', 16),
-(1, 'Buen Compañero', 'S', 16),
-(1, 'Competitivo', 'D', 16),
-(1, 'Alegre', 'I', 16),
-
 -- Grupo 19
-(1, 'Diplomático', 'S', 19),
-(1, 'Audaz', 'D', 19),
-(1, 'Refinado', 'C', 19),
-(1, 'Satisfecho', 'I', 19),
+(1, 'Aventurero', 'D', 19),
+(1, 'Receptivo', 'S', 19),
+(1, 'Cordial', 'I', 19),
+(1, 'Moderado', 'C', 19),
+
+-- Grupo 20
+(1, 'Indulgente', 'S', 20),
+(1, 'Esteta', 'C', 20),
+(1, 'Vigoroso', 'D', 20),
+(1, 'Sociable', 'I', 20),
 
 -- Grupo 21
-(1, 'Deseoso', 'I', 21),
-(1, 'Bondadoso', 'S', 21),
-(1, 'Consecuente', 'D', 21),
-(1, 'Resignado', 'C', 21),
+(1, 'Parlanchín', 'I', 21),
+(1, 'Controlado', 'C', 21),
+(1, 'Convencional', 'S', 21),
+(1, 'Decisivo', 'D', 21),
 
 -- Grupo 22
-(1, 'Confiable', 'C', 22),
-(1, 'Pacífico', 'S', 22),
-(1, 'Positivo', 'D', 22),
-(1, 'Carácter Firme', 'I', 22),
+(1, 'Cohibido', 'C', 22),
+(1, 'Exacto', 'S', 22),
+(1, 'Franco', 'D', 22),
+(1, 'Buen Compañero', 'I', 22),
 
 -- Grupo 23
-(1, 'Popular', 'I', 23),
-(1, 'Buen Vecino', 'S', 23),
-(1, 'Entusiasta', 'D', 23),
-(1, 'Devoto', 'C', 23);
+(1, 'Diplomático', 'S', 23),
+(1, 'Audaz', 'D', 23),
+(1, 'Refinado', 'C', 23),
+(1, 'Satisfecho', 'I', 23),
+
+-- Grupo 24
+(1, 'Inquieto', 'I', 24),
+(1, 'Popular', 'S', 24),
+(1, 'Buen Vecino', 'D', 24),
+(1, 'Devoto', 'C', 24);
 
 CREATE INDEX idx_respuestas_usuario ON respuestas(id_usuario);
 CREATE INDEX idx_resultados_usuario ON resultados_disc(id_usuario);
