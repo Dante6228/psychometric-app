@@ -75,7 +75,31 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Agresivo', 'D', 2),
 (1, 'Alma de la Fiesta', 'I', 2),
 (1, 'Comodino', 'S', 2),
-(1, 'Temeroso', 'C', 2),
+(1, 'Temeroso', 'C', 2), asd
+
+-- Grupo 3
+(1, 'Agradable', 'S', 3),
+(1, 'Temeroso de Dios', 'C', 3),
+(1, 'Tenaz', 'D', 3),
+(1, 'Atractivo', 'I', 3),
+
+-- Grupo 4
+(1, 'Cauteloso', 'C', 4),
+(1, 'Determinado', 'D', 4),
+(1, 'Convincente', 'I', 4),
+(1, 'Bonachón', 'S', 4),
+
+-- Grupo 5
+(1, 'Dócil', 'S', 5),
+(1, 'Atrevido', 'D', 5),
+(1, 'Leal', 'C', 5),
+(1, 'Encantador', 'I', 5),
+
+-- Grupo 6
+(1, 'Dispuesto', 'D', 6),
+(1, 'Deseoso', 'I', 6),
+(1, 'Consecuente', 'S', 6),
+(1, 'Entusiasta', 'C', 6),
 
 -- Grupo 3
 (1, 'Fuerza de Voluntad', 'D', 3),
@@ -113,12 +137,6 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Vigoroso', 'D', 8),
 (1, 'Sociable', 'I', 8),
 
--- Grupo 9
-(1, 'Agradable', 'S', 9),
-(1, 'Temeroso de Dios', 'C', 9),
-(1, 'Tenaz', 'D', 9),
-(1, 'Atractivo', 'I', 9),
-
 -- Grupo 10
 (1, 'Ecuánime', 'S', 10),
 (1, 'Nervioso', 'C', 10),
@@ -136,12 +154,6 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Controlado', 'C', 12),
 (1, 'Convencional', 'S', 12),
 (1, 'Decisivo', 'D', 12),
-
--- Grupo 13
-(1, 'Cauteloso', 'C', 13),
-(1, 'Determinado', 'D', 13),
-(1, 'Convincente', 'I', 13),
-(1, 'Bonachón', 'S', 13),
 
 -- Grupo 14
 (1, 'Generoso', 'S', 14),
@@ -161,12 +173,6 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Competitivo', 'D', 16),
 (1, 'Alegre', 'I', 16),
 
--- Grupo 17
-(1, 'Dócil', 'S', 17),
-(1, 'Atrevido', 'D', 17),
-(1, 'Leal', 'C', 17),
-(1, 'Encantador', 'I', 17),
-
 -- Grupo 18
 (1, 'Amiguero', 'I', 18),
 (1, 'Paciente', 'S', 18),
@@ -178,12 +184,6 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Audaz', 'D', 19),
 (1, 'Refinado', 'C', 19),
 (1, 'Satisfecho', 'I', 19),
-
--- Grupo 20
-(1, 'Dispuesto', 'D', 20),
-(1, 'Admirable', 'I', 20),
-(1, 'Conforme', 'S', 20),
-(1, 'Inquieto', 'C', 20),
 
 -- Grupo 21
 (1, 'Deseoso', 'I', 21),
