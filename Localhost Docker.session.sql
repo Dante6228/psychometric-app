@@ -75,7 +75,7 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Agresivo', 'D', 2),
 (1, 'Alma de la Fiesta', 'I', 2),
 (1, 'Comodino', 'S', 2),
-(1, 'Temeroso', 'C', 2), asd
+(1, 'Temeroso', 'C', 2),
 
 -- Grupo 3
 (1, 'Agradable', 'S', 3),
@@ -101,11 +101,41 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Consecuente', 'S', 6),
 (1, 'Entusiasta', 'C', 6),
 
--- Grupo 3
-(1, 'Fuerza de Voluntad', 'D', 3),
-(1, 'Mente Abierta', 'I', 3),
-(1, 'Complaciente', 'S', 3),
-(1, 'Animoso', 'D', 3),
+-- Grupo 7
+(1, 'Fuerza de Voluntad', 'D', 7),
+(1, 'Mente Abierta', 'I', 7),
+(1, 'Complaciente', 'S', 7),
+(1, 'Animoso', 'D', 7),
+
+-- Grupo 8
+(1, 'Confiado', 'I', 8),
+(1, 'Simpatizador', 'S', 8),
+(1, 'Tolerante', 'D', 8),
+(1, 'Afirmativo', 'C', 8),
+
+-- Grupo 9
+(1, 'Ecuánime', 'S', 9),
+(1, 'Preciso', 'C', 9),
+(1, 'Nervioso', 'I', 9),
+(1, 'Jovial', 'D', 9),
+
+-- Grupo 10
+(1, 'Disciplinado', 'S', 10),
+(1, 'Generoso', 'C', 10),
+(1, 'Animoso', 'I', 10),
+(1, 'Persistente', 'D', 10),
+
+-- Grupo 11
+(1, 'Competitivo', 'S', 11),
+(1, 'Alegre', 'C', 11),
+(1, 'Considerado', 'I', 11),
+(1, 'Armonioso', 'D', 11),
+
+-- Grupo 12
+(1, 'Admirable', 'S', 12),
+(1, 'Bondadoso', 'C', 12),
+(1, 'Resignado', 'I', 12),
+(1, 'Carácter Firme', 'D', 12),
 
 -- Grupo 4
 (1, 'Obediente', 'C', 4),
@@ -119,12 +149,6 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Cordial', 'I', 5),
 (1, 'Moderado', 'C', 5),
 
--- Grupo 6
-(1, 'Confiado', 'I', 6),
-(1, 'Simpatizador', 'S', 6),
-(1, 'Afirmativo', 'D', 6),
-(1, 'Preciso', 'C', 6),
-
 -- Grupo 7
 (1, 'Respetuoso', 'C', 7),
 (1, 'Emprendedor', 'D', 7),
@@ -136,12 +160,6 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Esteta', 'C', 8),
 (1, 'Vigoroso', 'D', 8),
 (1, 'Sociable', 'I', 8),
-
--- Grupo 10
-(1, 'Ecuánime', 'S', 10),
-(1, 'Nervioso', 'C', 10),
-(1, 'Jovial', 'I', 10),
-(1, 'Disciplinado', 'D', 10),
 
 -- Grupo 11
 (1, 'Valiente', 'D', 11),
