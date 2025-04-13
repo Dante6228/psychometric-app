@@ -137,11 +137,41 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Resignado', 'I', 12),
 (1, 'Carácter Firme', 'D', 12),
 
--- Grupo 4
-(1, 'Obediente', 'C', 4),
-(1, 'Quisquilloso', 'S', 4),
-(1, 'Inconquistable', 'D', 4),
-(1, 'Juguetón', 'I', 4),
+-- Grupo 13
+(1, 'Obediente', 'C', 13),
+(1, 'Quisquilloso', 'S', 13),
+(1, 'Inconquistable', 'D', 13),
+(1, 'Juguetón', 'I', 13),
+
+-- Grupo 14
+(1, 'Respetuoso', 'C', 14),
+(1, 'Emprendedor', 'D', 14),
+(1, 'Optimista', 'I', 14),
+(1, 'Servicial', 'S', 14),
+
+-- Grupo 15
+(1, 'Valiente', 'D', 15),
+(1, 'Inspirador', 'I', 15),
+(1, 'Sumiso', 'S', 15),
+(1, 'Tímido', 'C', 15),
+
+-- Grupo 16
+(1, 'Adaptable', 'S', 16),
+(1, 'Disputador', 'D', 16),
+(1, 'Indiferente', 'I', 16),
+(1, 'Sangre Liviana', 'C', 16),
+
+-- Grupo 17
+(1, 'Amiguero', 'I', 17),
+(1, 'Paciente', 'S', 17),
+(1, 'Confianza en si Mismo', 'D', 17),
+(1, 'Mesurado para Hablar', 'C', 17),
+
+-- Grupo 18
+(1, 'Conforme', 'I', 18),
+(1, 'Confiable', 'S', 18),
+(1, 'Pacifico', 'D', 18),
+(1, 'Positivo', 'C', 18),
 
 -- Grupo 5
 (1, 'Aventurero', 'D', 5),
@@ -149,23 +179,11 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Cordial', 'I', 5),
 (1, 'Moderado', 'C', 5),
 
--- Grupo 7
-(1, 'Respetuoso', 'C', 7),
-(1, 'Emprendedor', 'D', 7),
-(1, 'Optimista', 'I', 7),
-(1, 'Servicial', 'S', 7),
-
 -- Grupo 8
 (1, 'Indulgente', 'S', 8),
 (1, 'Esteta', 'C', 8),
 (1, 'Vigoroso', 'D', 8),
 (1, 'Sociable', 'I', 8),
-
--- Grupo 11
-(1, 'Valiente', 'D', 11),
-(1, 'Inspirador', 'I', 11),
-(1, 'Sumiso', 'S', 11),
-(1, 'Tímido', 'C', 11),
 
 -- Grupo 12
 (1, 'Parlanchín', 'I', 12),
@@ -179,23 +197,11 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Indiferente', 'C', 14),
 (1, 'Sangre Liviana', 'I', 14),
 
--- Grupo 15
-(1, 'Adaptable', 'S', 15),
-(1, 'Disputador', 'D', 15),
-(1, 'Franco', 'I', 15),
-(1, 'Exacto', 'C', 15),
-
 -- Grupo 16
 (1, 'Cohibido', 'C', 16),
 (1, 'Buen Compañero', 'S', 16),
 (1, 'Competitivo', 'D', 16),
 (1, 'Alegre', 'I', 16),
-
--- Grupo 18
-(1, 'Amiguero', 'I', 18),
-(1, 'Paciente', 'S', 18),
-(1, 'Confianza en si Mismo', 'D', 18),
-(1, 'Mesurado para Hablar', 'C', 18),
 
 -- Grupo 19
 (1, 'Diplomático', 'S', 19),
