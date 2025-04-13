@@ -35,6 +35,7 @@ CREATE TABLE respuestas (
     id_pregunta INT NOT NULL,
     mas BOOLEAN DEFAULT FALSE,
     menos BOOLEAN DEFAULT FALSE,
+    fecha_respuesta DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregunta),
     UNIQUE KEY (id_usuario, id_pregunta)
@@ -48,7 +49,8 @@ CREATE TABLE resultados_disc (
     i_total INT,
     s_total INT,
     c_total INT,
-    cumple_perfil BOOLEAN,
+    perfil_ideal BOOLEAN,
+    fecha_calculo DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 

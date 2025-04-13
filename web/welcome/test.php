@@ -1,5 +1,15 @@
 <?php
+
 session_start();
+
+// Mostrar errores si existen
+if (isset($_SESSION['error_test'])) {
+    echo '<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 animate-fade-in">';
+    echo '<p>'.htmlspecialchars($_SESSION['error_test']).'</p>';
+    echo '</div>';
+    unset($_SESSION['error_test']); // Limpiar el mensaje después de mostrarlo
+}
+
 require_once __DIR__ . '/../../php/conexion.php';
 
 $conexion = new Conexion();
@@ -18,8 +28,7 @@ foreach ($preguntas as $pregunta) {
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" class="selection:bg-slate-200">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -185,7 +194,7 @@ foreach ($preguntas as $pregunta) {
         </div>
 
         <!-- Contenedor del formulario -->
-        <form action="guardar_respuestas.php" method="POST" class="divide-y divide-soft-grey/30">
+        <form action="../../php/respuestas/procesar_respuestas.php" method="POST" class="divide-y divide-soft-grey/30">
             <?php foreach ($grupos as $numGrupo => $grupoPreguntas): ?>
                 <div class="p-6 group hover:bg-soft-white/50 transition-colors">
                     <div class="flex items-center mb-4">
