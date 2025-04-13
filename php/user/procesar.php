@@ -11,26 +11,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correo = trim($_POST['email']);
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM usuarios WHERE correo = :correo";
+    $sql = "SELECT * FROM usuarios WHERE email = :email";
     $stmt = $conn->prepare($sql);
-    $stmt->execute(['correo' => $correo]);
+    $stmt->execute(['email' => $correo]);
 
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($usuario) {
-        if (password_verify($password, $usuario['contraseña'])) {
+        if (password_verify($password, $usuario['contraseña_hash'])) {
 
-            $_SESSION['id'] = $usuario['id'];
+            $_SESSION['id_usuario'] = $usuario['id_usuario'];
             $_SESSION['nombre'] = $usuario['nombre'];
-            $_SESSION['tipo_usuario'] = $usuario['tipo_usuario'];
+            $_SESSION['tipo'] = $usuario['tipo'];
+            $_SESSION['email'] = $usuario['email'];
 
-            $_SESSION['id'] = $usuario['id'];
-            $_SESSION['nombre'] = $usuario['nombre'];
-            $_SESSION['tipo_usuario'] = $usuario['tipo_usuario'];
-            $_SESSION['correo'] = $usuario['correo'];
-            $_SESSION['contraseña'] = $usuario['contraseña'];
-
-            if ($usuario['tipo_usuario'] === 'administrador') {
+            if ($usuario['tipo'] === 'administrativo') {
                 header("Location: ../../web/welcome/dashboard.php");
                 exit();
             } else {
