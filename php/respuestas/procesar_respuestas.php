@@ -2,10 +2,12 @@
 
 session_start();
 
-require_once __DIR__ . '/../../php/conexion.php';
+require_once __DIR__ . '/../conexion.php';
 
+// Verificar sesión
 if (!isset($_SESSION['id_usuario'])) {
-    header('Location: ../../web/user/index.php?message=errPost');
+    $_SESSION['error_test'] = "Debes iniciar sesión para completar el test";
+    header('Location: ../../web/user/login.php');
     exit();
 }
 
@@ -13,18 +15,18 @@ $conexion = new Conexion();
 $conn = $conexion->connection();
 
 try {
+    // Validar que se enviaron respuestas
     if (empty($_POST['respuestas'])) {
         throw new Exception("No se recibieron respuestas. Por favor completa el test.");
     }
 
     $conn->beginTransaction();
 
+    // Obtener ID del test CLEAVER
     $stmt = $conn->prepare("SELECT id_test FROM tests WHERE nombre_test = 'CLEAVER' LIMIT 1");
-    if (!$stmt->execute()) {
-        throw new Exception("Error al consultar el test");
-    }
-
+    $stmt->execute();
     $test = $stmt->fetch(PDO::FETCH_ASSOC);
+
     if (!$test) {
         throw new Exception("El test CLEAVER no está configurado en el sistema");
     }
@@ -33,106 +35,98 @@ try {
     $id_usuario = $_SESSION['id_usuario'];
 
     // Verificar si el usuario ya completó el test
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM respuestas
-                            WHERE id_usuario = ?
-                            AND id_pregunta IN (SELECT id_pregunta FROM preguntas WHERE id_test = ?)");
-    if (!$stmt->execute([$id_usuario, $id_test])) {
-        throw new Exception("Error al verificar tests previos");
-    }
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM respuestas WHERE id_usuario = ?");
+    $stmt->execute([$id_usuario]);
 
     if ($stmt->fetchColumn() > 0) {
-        throw new Exception("Ya has completado este test anteriormente. No puedes repetirlo.");
+        throw new Exception("Ya has completado este test anteriormente.");
     }
 
+    // Inicializar contadores DISC
     $contadores = ['D' => 0, 'I' => 0, 'S' => 0, 'C' => 0];
-    $errores_grupos = [];
+    $errores = [];
 
+    // Procesar cada grupo de respuestas
     foreach ($_POST['respuestas'] as $grupo => $respuestas) {
+        // Validar que se seleccionó MAS y MENOS
         if (!isset($respuestas['mas']) || !isset($respuestas['menos'])) {
-            $errores_grupos[] = "Grupo $grupo: Debes seleccionar una opción MAS y una MENOS";
+            $errores[] = "Grupo $grupo: Debes seleccionar una opción MAS y una MENOS";
             continue;
         }
 
+        // Validar que no sea la misma opción
         if ($respuestas['mas'] == $respuestas['menos']) {
-            $errores_grupos[] = "Grupo $grupo: No puedes seleccionar la misma opción para MAS y MENOS";
+            $errores[] = "Grupo $grupo: No puedes seleccionar la misma opción para MAS y MENOS";
             continue;
         }
 
-        try {
-            $stmt = $conn->prepare("SELECT factor_disc FROM preguntas WHERE id_pregunta = ?");
-            if (!$stmt->execute([$respuestas['mas']])) {
-                throw new Exception("Error al procesar respuesta MAS en grupo $grupo");
-            }
+        // Procesar respuesta MAS
+        $stmt = $conn->prepare("SELECT factor_disc FROM preguntas WHERE id_pregunta = ?");
+        $stmt->execute([$respuestas['mas']]);
+        $factor_mas = $stmt->fetchColumn();
 
-            $factor = $stmt->fetchColumn();
-            if (!$factor) {
-                throw new Exception("Respuesta MAS inválida en grupo $grupo");
-            }
-
-            $contadores[$factor]++;
-
-            $stmt = $conn->prepare("INSERT INTO respuestas (id_usuario, id_pregunta, mas, menos, fecha_respuesta)
-                                    VALUES (?, ?, 1, 0, NOW())");
-            if (!$stmt->execute([$id_usuario, $respuestas['mas']])) {
-                throw new Exception("Error al guardar respuesta MAS en grupo $grupo");
-            }
-
-            $stmt = $conn->prepare("SELECT factor_disc FROM preguntas WHERE id_pregunta = ?");
-            if (!$stmt->execute([$respuestas['menos']])) {
-                throw new Exception("Error al procesar respuesta MENOS en grupo $grupo");
-            }
-
-            $factor = $stmt->fetchColumn();
-            if (!$factor) {
-                throw new Exception("Respuesta MENOS inválida en grupo $grupo");
-            }
-
-            $contadores[$factor]--;
-
-            $stmt = $conn->prepare("INSERT INTO respuestas (id_usuario, id_pregunta, mas, menos, fecha_respuesta)
-                                    VALUES (?, ?, 0, 1, NOW())");
-            if (!$stmt->execute([$id_usuario, $respuestas['menos']])) {
-                throw new Exception("Error al guardar respuesta MENOS en grupo $grupo");
-            }
-        } catch (Exception $e) {
-            $errores_grupos[] = $e->getMessage();
+        if (!$factor_mas) {
+            $errores[] = "Grupo $grupo: Respuesta MAS inválida";
+            continue;
         }
+
+        // Sumar al contador
+        $contadores[$factor_mas]++;
+
+        // Insertar respuesta MAS
+        $stmt = $conn->prepare("INSERT INTO respuestas (id_usuario, id_pregunta, mas, menos) VALUES (?, ?, 1, 0)");
+        $stmt->execute([$id_usuario, $respuestas['mas']]);
+
+        // Procesar respuesta MENOS
+        $stmt = $conn->prepare("SELECT factor_disc FROM preguntas WHERE id_pregunta = ?");
+        $stmt->execute([$respuestas['menos']]);
+        $factor_menos = $stmt->fetchColumn();
+
+        if (!$factor_menos) {
+            $errores[] = "Grupo $grupo: Respuesta MENOS inválida";
+            continue;
+        }
+
+        // Restar al contador
+        $contadores[$factor_menos]--;
+
+        // Insertar respuesta MENOS
+        $stmt = $conn->prepare("INSERT INTO respuestas (id_usuario, id_pregunta, mas, menos) VALUES (?, ?, 0, 1)");
+        $stmt->execute([$id_usuario, $respuestas['menos']]);
     }
 
-    if (!empty($errores_grupos)) {
-        throw new Exception(implode("<br>", $errores_grupos));
+    // Si hay errores, cancelar
+    if (!empty($errores)) {
+        throw new Exception(implode("<br>", $errores));
     }
 
+    // Calcular resultados finales
     $d_total = $contadores['D'];
     $i_total = $contadores['I'];
     $s_total = $contadores['S'];
     $c_total = $contadores['C'];
 
-    // Comparar con perfil ideal (implementar tu lógica aquí)
-    $perfil_ideal = false; // Cambiar por tu lógica real
-
-    // Convertir a entero para MySQL
-    $perfil_ideal_int = $perfil_ideal ? 1 : 0;
+    // Definir perfil_ideal como entero (1 o 0)
+    $perfil_ideal = ($d_total >= 10 && $i_total >= 8 && $s_total >= 6 && $c_total >= 4) ? 1 : 0;
 
     // Guardar resultados
     $stmt = $conn->prepare("INSERT INTO resultados_disc
-                        (id_usuario, d_total, i_total, s_total, c_total, perfil_ideal, fecha_calculo)
-                        VALUES (?, ?, ?, ?, ?, ?, NOW())");
-    if (!$stmt->execute([$id_usuario, $d_total, $i_total, $s_total, $c_total, $perfil_ideal_int])) {
-        throw new Exception("Error al guardar los resultados finales");
-    }
+                        (id_usuario, d_total, i_total, s_total, c_total, perfil_ideal)
+                        VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$id_usuario, $d_total, $i_total, $s_total, $c_total, $perfil_ideal]);
 
     $conn->commit();
 
+    // Redirigir a resultados
     $_SESSION['test_completed'] = true;
     header('Location: ../../web/welcome/resultados.php');
     exit();
 } catch (Exception $e) {
+    // Revertir en caso de error
     if ($conn->inTransaction()) {
         $conn->rollBack();
     }
 
-    error_log("Error en procesar_respuestas: " . $e->getMessage());
     $_SESSION['error_test'] = $e->getMessage();
     header('Location: ../../web/welcome/test.php');
     exit();
