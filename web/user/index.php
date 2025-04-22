@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $validMessages = ['errPss', 'errEmail', 'errPost', 'login'];
 $message = (isset($_GET['message']) && in_array($_GET['message'], $validMessages)) ? $_GET['message'] : null;
 
@@ -38,9 +40,20 @@ if ($message) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Iniciar sesión</title>
 </head>
-<body class="bg-soft-white flex items-center justify-center min-h-screen">
+<body class="bg-soft-white flex flex-col items-center justify-center min-h-screen">
+        <?php
+
+            if (isset($_SESSION['error_test'])) {
+                echo '<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 animate-fade-in">';
+                echo '<p>'.htmlspecialchars($_SESSION['error_test']).'</p>';
+                echo '</div>';
+                unset($_SESSION['error_test']);
+            }
+
+        ?>
     <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
         <h1 class="text-3xl font-bold text-center mb-6">Iniciar sesión</h1>
+
 
         <form action="../../php/user/procesar.php" method="POST" class="flex flex-col gap-4">
             <div>

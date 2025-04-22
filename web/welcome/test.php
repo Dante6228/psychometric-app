@@ -2,6 +2,13 @@
 
 session_start();
 
+// agregar validación de usuario
+if (!isset($_SESSION['id_usuario'])) {
+    $_SESSION['error_test'] = "Debes iniciar sesión para completar el test";
+    header('Location: ../user/index.php');
+    exit();
+}
+
 // Mostrar errores si existen
 if (isset($_SESSION['error_test'])) {
     echo '<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 animate-fade-in">';
