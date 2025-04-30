@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 // Verificar autenticación y permisos
@@ -26,10 +27,10 @@ if (!$id_estudiante || $id_estudiante <= 0) {
 
 // Obtener información del estudiante y sus resultados
 $stmt = $conn->prepare("
-    SELECT 
-        u.id_usuario, 
-        u.nombre, 
-        u.email, 
+    SELECT
+        u.id_usuario,
+        u.nombre,
+        u.email,
         r.fecha_resultado,
         r.d_total, r.d_percent,
         r.i_total, r.i_percent,
@@ -118,10 +119,12 @@ $descripciones = [
 
 // Función para determinar el nivel (Alto+/Bajo-/Moderado+/-)
 function determinarNivel($total, $percent, $umbral = 50) {
-    if ($total > 0 && $percent >= $umbral) return 'Alto+';
-    if ($total < 0 && $percent >= $umbral) return 'Bajo-';
-    if ($total > 0) return 'Moderado+';
-    return 'Moderado-';
+    if ($percent >= $umbral) {
+        return $total > 0 ? 'Alto+' : 'Bajo-';
+    } elseif ($percent < $umbral) {
+        return $total > 0 ? 'Moderado+' : 'Moderado-';
+    }
+    return 'Indeterminado';
 }
 
 // Configuración de umbral para considerar alto/bajo
@@ -223,45 +226,50 @@ $mensaje_perfil = $estudiante['perfil_ideal'] ?
                         
                         <!-- Descripción del perfil -->
                         <div>
-                            <h3 class="text-lg font-medium mb-4">Perfil Dominante: 
+                            <h3 class="text-lg font-medium mb-4">Perfil Dominante:
                                 <span class="<?php echo $colores[$perfil_dominante]['text']; ?>">
-                                    <?php echo $descripciones[$perfil_dominante]['title']; ?> 
-                                    (<?php echo $perfil_dominante; ?><?php 
-                                        echo $estudiante[strtolower($perfil_dominante) . '_total'] > 0 ? '+' : '-'; 
+                                    <?php echo $descripciones[$perfil_dominante]['title']; ?>
+                                    (<?php echo $perfil_dominante; ?><?php
+                                        echo $estudiante[strtolower($perfil_dominante) . '_total'] > 0 ? '+' : '-';
                                     ?>)
                                 </span>
                             </h3>
                             <p class="text-gray-600 mb-4">
-                                <?php 
+                                <?php
                                 $nivel_dominante = $niveles[strtolower($perfil_dominante)];
-                                echo $descripciones[$perfil_dominante][strpos($nivel_dominante, 'Alto') !== false ? 'alto' : 'bajo']; 
+                                echo $descripciones[$perfil_dominante][strpos($nivel_dominante, 'Alto') !== false ? 'alto' : 'bajo'];
                                 ?>
                             </p>
                             
                             <div class="space-y-3">
-                                <?php foreach (['D', 'I', 'S', 'C'] as $factor): 
-                                    $factor_lower = strtolower($factor);
-                                    $nivel = $niveles[$factor_lower];
-                                ?>
-                                    <div>
-                                        <h4 class="font-medium text-gray-800">
-                                            <?php echo $descripciones[$factor]['title']; ?> (<?php echo $factor; ?>)
-                                            <span class="font-semibold text-<?php 
-                                                echo strpos($nivel, 'Alto') !== false ? 'green' : 
-                                                    (strpos($nivel, 'Bajo') !== false ? 'blue' : 'gray'); ?>-600">
-                                                <?php echo $nivel; ?>
-                                            </span>
-                                        </h4>
-                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                            <div class="bg-<?php echo $colores[$factor]['color']; ?>-500 h-2.5 rounded-full" 
-                                                 style="width: <?php echo $estudiante["{$factor_lower}_percent"]; ?>%"></div>
-                                        </div>
-                                        <span class="text-sm text-gray-600">
-                                            <?php echo $estudiante["{$factor_lower}_percent"]; ?>% 
-                                            (Puntuación: <?php echo $estudiante["{$factor_lower}_total"]; ?>)
+                            <?php foreach (['D', 'I', 'S', 'C'] as $factor):
+                                $factor_lower = strtolower($factor);
+                                $nivel = $niveles[$factor_lower];
+
+                                $color_class = 'gray';
+                                if (strpos($nivel, 'Alto') !== false) {
+                                    $color_class = 'green';
+                                } elseif (strpos($nivel, 'Bajo') !== false) {
+                                    $color_class = 'blue';
+                                }
+                            ?>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">
+                                        <?php echo $descripciones[$factor]['title']; ?> (<?php echo $factor; ?>)
+                                        <span class="font-semibold text-<?php echo $color_class; ?>-600">
+                                            <?php echo $nivel; ?>
                                         </span>
+                                    </h4>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-<?php echo $colores[$factor]['color']; ?>-500 h-2.5 rounded-full"
+                                            style="width: <?php echo $estudiante["{$factor_lower}_percent"]; ?>%"></div>
                                     </div>
-                                <?php endforeach; ?>
+                                    <span class="text-sm text-gray-600">
+                                        <?php echo $estudiante["{$factor_lower}_percent"]; ?>%
+                                        (Puntuación: <?php echo $estudiante["{$factor_lower}_total"]; ?>)
+                                    </span>
+                                </div>
+                            <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -364,8 +372,8 @@ $mensaje_perfil = $estudiante['perfil_ideal'] ?
                         ?>
                             <div class="mb-4">
                                 <h4 class="font-medium text-blue-700">
-                                    <?php echo $descripciones[$factor]['title']; ?> (<?php echo $factor; ?><?php 
-                                        echo $estudiante["{$factor_lower}_total"] > 0 ? '+' : '-'; 
+                                    <?php echo $descripciones[$factor]['title']; ?> (<?php echo $factor; ?><?php
+                                        echo $estudiante["{$factor_lower}_total"] > 0 ? '+' : '-';
                                     ?>):
                                 </h4>
                                 <ul class="list-disc pl-5 text-blue-700 space-y-1 ml-2">
@@ -395,38 +403,6 @@ $mensaje_perfil = $estudiante['perfil_ideal'] ?
                         </div>
                     </div>
                     
-                    <!-- Respuestas del test -->
-                    <div>
-                        <h3 class="text-xl font-semibold mb-4">Respuestas del Test</h3>
-                        <div class="space-y-6">
-                            <?php foreach ($grupos_respuestas as $grupo => $grupo_data): ?>
-                                <div class="border <?php echo $colores[$grupo_data['factor']]['border']; ?> rounded-lg overflow-hidden">
-                                    <div class="<?php echo $colores[$grupo_data['factor']]['bg']; ?> px-4 py-2 font-medium">
-                                        <?php echo $grupo; ?> - Factor <?php echo $grupo_data['factor']; ?>
-                                    </div>
-                                    <div class="p-4">
-                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <?php foreach ($grupo_data['preguntas'] as $pregunta): ?>
-                                                <div class="<?php echo $pregunta['mas'] ? 'bg-green-50 border border-green-200' : ($pregunta['menos'] ? 'bg-red-50 border border-red-200' : 'bg-gray-50'); ?> p-3 rounded">
-                                                    <div class="flex justify-between items-start">
-                                                        <span><?php echo htmlspecialchars($pregunta['texto_pregunta']); ?></span>
-                                                        <div class="flex space-x-2 ml-2">
-                                                            <?php if ($pregunta['mas']): ?>
-                                                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">MÁS</span>
-                                                            <?php endif; ?>
-                                                            <?php if ($pregunta['menos']): ?>
-                                                                <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">MENOS</span>
-                                                            <?php endif; ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
                 </div>
             </div>
             
@@ -438,9 +414,6 @@ $mensaje_perfil = $estudiante['perfil_ideal'] ?
                 <div class="flex space-x-3">
                     <a href="generar_pdf.php?id=<?php echo $id_estudiante; ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">
                         Generar PDF
-                    </a>
-                    <a href="exportar_datos.php?id=<?php echo $id_estudiante; ?>" class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">
-                        Exportar datos
                     </a>
                 </div>
             </div>
@@ -457,7 +430,6 @@ $mensaje_perfil = $estudiante['perfil_ideal'] ?
     <!-- Script para gráficos -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Gráfico radar con configuración mejorada
             const ctx = document.getElementById('radarChart').getContext('2d');
             const radarChart = new Chart(ctx, {
                 type: 'radar',
