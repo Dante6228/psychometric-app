@@ -183,37 +183,98 @@ $mensaje_perfil = $resultado['perfil_ideal'] ?
             <!-- Recomendaciones -->
             <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mb-8">
                 <h3 class="font-bold text-lg text-blue-800 mb-2">Recomendaciones para tu desarrollo</h3>
-                <?php if ($perfil_dominante == 'D'): ?>
-                    <ul class="list-disc pl-5 text-blue-700 space-y-1">
-                        <li>Practica la paciencia y escucha activa con colegas</li>
-                        <li>Considera más opiniones antes de tomar decisiones</li>
-                        <li>Delega tareas para no sobrecargarte</li>
-                    </ul>
-                <?php elseif ($perfil_dominante == 'I'): ?>
-                    <ul class="list-disc pl-5 text-blue-700 space-y-1">
-                        <li>Enfócate en completar tareas antes de empezar nuevas</li>
-                        <li>Toma notas durante reuniones importantes</li>
-                        <li>Practica la escucha sin interrumpir</li>
-                    </ul>
-                <?php elseif ($perfil_dominante == 'S'): ?>
-                    <ul class="list-disc pl-5 text-blue-700 space-y-1">
-                        <li>Expresa tus opiniones con mayor asertividad</li>
-                        <li>Abrete a cambios graduales</li>
-                        <li>Establece límites claros</li>
-                    </ul>
-                <?php else: ?>
-                    <ul class="list-disc pl-5 text-blue-700 space-y-1">
-                        <li>Practica la flexibilidad ante cambios</li>
-                        <li>Prioriza lo importante sobre lo perfecto</li>
-                        <li>Comparte tus análisis de forma más concisa</li>
-                    </ul>
-                <?php endif; ?>
+                
+                <?php
+                // Definimos recomendaciones específicas para Alto/Bajo en cada factor
+                $recomendaciones = [
+                    'D' => [
+                        'alto' => [
+                            'Practica la paciencia y escucha activa con colegas',
+                            'Considera más opiniones antes de tomar decisiones importantes',
+                            'Aprende a delegar tareas efectivamente',
+                            'Controla tu impulsividad en situaciones tensas'
+                        ],
+                        'bajo' => [
+                            'Toma iniciativa en situaciones que requieren liderazgo',
+                            'Desarrolla mayor confianza en tus decisiones',
+                            'Atrévete a expresar tus opiniones con firmeza',
+                            'Establece metas más desafiantes para ti mismo'
+                        ]
+                    ],
+                    'I' => [
+                        'alto' => [
+                            'Enfócate en completar tareas antes de empezar nuevas',
+                            'Desarrolla mayor organización en tus actividades',
+                            'Practica la escucha activa sin interrumpir',
+                            'Controla tu entusiasmo en situaciones formales'
+                        ],
+                        'bajo' => [
+                            'Participa más activamente en interacciones sociales',
+                            'Expresa tus emociones con mayor libertad',
+                            'Practica habilidades de persuasión',
+                            'Comparte tus ideas con mayor entusiasmo'
+                        ]
+                    ],
+                    'S' => [
+                        'alto' => [
+                            'Expresa tus opiniones con mayor asertividad',
+                            'Abrete a cambios graduales en tu rutina',
+                            'Establece límites claros en tus relaciones',
+                            'Toma decisiones con mayor rapidez cuando sea necesario'
+                        ],
+                        'bajo' => [
+                            'Desarrolla mayor consistencia en tus acciones',
+                            'Cultiva la paciencia en procesos largos',
+                            'Establece rutinas más estables',
+                            'Practica la escucha activa sin necesidad de responder'
+                        ]
+                    ],
+                    'C' => [
+                        'alto' => [
+                            'Practica la flexibilidad ante cambios inesperados',
+                            'Prioriza lo importante sobre lo perfecto',
+                            'Comparte tus análisis de forma más concisa',
+                            'Acepta que algunos errores son parte del aprendizaje'
+                        ],
+                        'bajo' => [
+                            'Desarrolla mayor atención a los detalles',
+                            'Establece estándares más altos de calidad',
+                            'Sigue procedimientos establecidos cuando sea necesario',
+                            'Documenta más tus procesos y decisiones'
+                        ]
+                    ]
+                ];
+                
+                // Mostramos recomendaciones para cada factor
+                foreach (['D', 'I', 'S', 'C'] as $factor):
+                    $puntaje = $resultado[strtolower($factor) . '_total'];
+                    $nivel = $puntaje > 0 ? 'alto' : 'bajo';
+                ?>
+                    <div class="mb-4">
+                        <h4 class="font-medium text-blue-700">
+                            <?php echo $descripciones[$factor]['title']; ?> (<?php echo $factor; ?><?php echo $puntaje > 0 ? '+' : '-'; ?>):
+                        </h4>
+                        <ul class="list-disc pl-5 text-blue-700 space-y-1 ml-2">
+                            <?php foreach ($recomendaciones[$factor][$nivel] as $recomendacion): ?>
+                                <li><?php echo $recomendacion; ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endforeach; ?>
+                
+                <!-- Recomendación especial para el perfil dominante -->
+                <div class="mt-4 pt-4 border-t border-blue-200">
+                    <h4 class="font-medium text-blue-800">Recomendación clave para tu perfil dominante (<?php echo $perfil_dominante; ?>):</h4>
+                    <p class="text-blue-700 mt-1 pl-2"><?php
+                        echo $recomendaciones[$perfil_dominante][$resultado[strtolower($perfil_dominante) . '_total'] > 0 ? 'alto' : 'bajo'][0];
+                    ?></p>
+                </div>
             </div>
 
             <!-- Botón de acción -->
             <div class="flex justify-center mt-8">
                 <a href="../../web/welcome/dashboard.php" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">
-                    Volver al Dashboard
+                    Volver
                 </a>
             </div>
         </div>
