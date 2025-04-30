@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 require_once __DIR__ . '/../conexion.php';
@@ -106,14 +105,46 @@ try {
     $s_total = $contadores['S'];
     $c_total = $contadores['C'];
 
-    // Definir perfil_ideal como entero (1 o 0)
+   // Calcular porcentajes (usando valores absolutos)
+    $total = abs($d_total) + abs($i_total) + abs($s_total) + abs($c_total);
+    $d_percent = $total > 0 ? round(abs($d_total) / $total * 100) : 0;
+    $i_percent = $total > 0 ? round(abs($i_total) / $total * 100) : 0;
+    $s_percent = $total > 0 ? round(abs($s_total) / $total * 100) : 0;
+    $c_percent = $total > 0 ? round(abs($c_total) / $total * 100) : 0;
+
+    // Determinar perfil dominante
+    $perfiles = [
+        'D' => abs($d_total),  // Usamos abs() para obtener la magnitud
+        'I' => abs($i_total),
+        'S' => abs($s_total),
+        'C' => abs($c_total)
+    ];
+    arsort($perfiles);  // Ordena de mayor a menor según los valores absolutos
+    $perfil_dominante = key($perfiles);
+
+    // Definir perfil_ideal como booleano (1 o 0)
     $perfil_ideal = ($d_total >= 10 && $i_total >= 8 && $s_total >= 6 && $c_total >= 4) ? 1 : 0;
 
-    // Guardar resultados
+    // Guardar resultados con todos los campos
     $stmt = $conn->prepare("INSERT INTO resultados_disc
-                        (id_usuario, d_total, i_total, s_total, c_total, perfil_ideal)
-                        VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$id_usuario, $d_total, $i_total, $s_total, $c_total, $perfil_ideal]);
+                        (id_usuario, d_total, d_percent, i_total, i_percent,
+                            s_total, s_percent, c_total, c_percent,
+                            perfil_dominante, perfil_ideal)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+    $stmt->execute([
+        $id_usuario,
+        $d_total,
+        $d_percent,
+        $i_total,
+        $i_percent,
+        $s_total,
+        $s_percent,
+        $c_total,
+        $c_percent,
+        $perfil_dominante,
+        $perfil_ideal
+    ]);
 
     $conn->commit();
 

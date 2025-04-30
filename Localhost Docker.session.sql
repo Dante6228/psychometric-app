@@ -46,11 +46,16 @@ CREATE TABLE resultados_disc (
     id_resultado INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
     d_total INT,
+    d_percent INT,
     i_total INT,
+    i_percent INT,
     s_total INT,
+    s_percent INT,
     c_total INT,
+    c_percent INT,
+    perfil_dominante CHAR(1),
     perfil_ideal BOOLEAN,
-    fecha_calculo DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_resultado DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
