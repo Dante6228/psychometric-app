@@ -105,7 +105,7 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Fuerza de Voluntad', 'D', 7),
 (1, 'Mente Abierta', 'I', 7),
 (1, 'Complaciente', 'S', 7),
-(1, 'Animoso', 'D', 7),
+(1, 'Animoso', 'C', 7),
 
 -- Grupo 8
 (1, 'Confiado', 'I', 8),
@@ -126,10 +126,10 @@ INSERT INTO preguntas (id_test, texto_pregunta, factor_disc, grupo_preguntas) VA
 (1, 'Persistente', 'D', 10),
 
 -- Grupo 11
-(1, 'Competitivo', 'S', 11),
-(1, 'Alegre', 'C', 11),
-(1, 'Considerado', 'I', 11),
-(1, 'Armonioso', 'D', 11),
+(1, 'Competitivo', 'D', 11),
+(1, 'Alegre', 'I', 11),
+(1, 'Armonioso', 'S', 11),
+(1, 'Exacto', 'C', 11),
 
 -- Grupo 12
 (1, 'Admirable', 'S', 12),

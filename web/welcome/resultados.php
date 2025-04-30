@@ -45,19 +45,28 @@ $perfil_dominante = key($perfiles);
 $descripciones = [
     'D' => [
         'title' => 'Dominancia',
-        'description' => 'Personas decisivas, enfocadas en resultados, directas y competitivas. Les gusta el control y los desafíos.'
+        'description' => $resultado['d_total'] > 0 ?
+            'Le apasionan los retos. Puede ser considerado temerario por los demás. Siempre listo a la competencia. Cuando algo esta en juego, sale lo mejor de él. Tiene respeto por aquellos que ganan contra todas las expectativas. Se desempeña mejor cuanto tiene autonomía.' :
+            'Son personas apacibles que buscan la paz y la armonía. En donde existen problemas, ellos preferirán que sean otros los que inicien la acción, quizá hasta sacrificando su propio interés para adaptarse a las soluciones impuestas. La humildad es una virtud.'
     ],
     'I' => [
         'title' => 'Influencia',
-        'description' => 'Personas entusiastas, sociables, persuasivas y optimistas. Disfrutan trabajando en equipo y motivando a otros.'
+        'description' => $resultado['i_total'] > 0 ?
+            'Abierto, persuasivo y sociable. Generalmente optimista, puede ver algo bueno en cualquier situación. Interesado principalmente en la gente, sus problemas y actividades. Dispuesto a ayudar a otros a promover sus proyectos, así como los suyos propios.' :
+            'Lógicas y objetivas en todo lo que hacen, con frecuencia se acusa a estas personas de no gustar de la gente. El problema no es de sentir atracción o afecto, sino lo que hacen al respecto. Socialmente pasivos, frecuentemente asumen el rol de observador en cualquier ambiente social, incluso ante los conflictos.'
     ],
     'S' => [
-        'title' => 'Estabilidad',
-        'description' => 'Personas pacientes, predecibles, estables y buen oyentes. Valoran la seguridad y la cooperación.'
+        'title' => 'Constancia',
+        'description' => $resultado['s_total'] > 0 ?
+            'Generalmente amable, tranquilo y llevadero. Es poco demostrativo y controlado, ya que no es de naturaleza explosiva de pronta reacción; puede ocultar sus sentimientos y ser rencoroso. Gusta de establecer relaciones amistosas cercanas con un grupo relativamente pequeño de personas.' :
+            'Flexibles, variables y activos. Estas personas ponen las cosas en movimiento. La variedad es el condimento de la vida; además, es difícil pegarle a un blanco en constante movimiento. Estas personas se sienten cómodas con un alto ritmo de cambios de actividad y de rutina.'
     ],
     'C' => [
         'title' => 'Cumplimiento',
-        'description' => 'Personas precisas, analíticas, sistemáticas y detallistas. Siguen procedimientos y normas establecidas.'
+        'description' => $resultado['c_total'] > 0 ?
+            'Es generalmente pacifico y se adapta a las situaciones con el fin de evitar antagonismos. Siendo sensible, busca apreciación y es fácilmente herido por otros. Es humilde leal y dócil, tratando de hacer siempre las cosas lo mejor posible.' :
+            '"Independientes, desinhibidos y aventureros; estos espíritus libres disfrutan de la vida. Cualquier cosa nueva y diferente les emociona.
+            Debido a que prefieren campos nuevos y mares desconocidos, con frecuencia estas personas preocupan a las más conservadores por su constante innovación."'
     ]
 ];
 
@@ -113,31 +122,56 @@ $mensaje_perfil = $resultado['perfil_ideal'] ?
 
                 <!-- Tabla de resultados -->
                 <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white border border-gray-200">
+                    <table class="min-w-full bg-white border border-gray-200 p-4">
                         <thead class="bg-gray-100">
                             <tr>
                                 <th class="py-3 px-4 border-b text-left">Factor</th>
+                                <th class="py-3 px-4 border-b text-left">Nivel</th>
                                 <th class="py-3 px-4 border-b text-left">Puntuación</th>
                                 <th class="py-3 px-4 border-b text-left">Porcentaje</th>
                                 <th class="py-3 px-4 border-b text-left">Características</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach (['D', 'I', 'S', 'C'] as $factor): ?>
+                            <?php
+                            // Definimos las descripciones completas para Alto/Bajo
+                            $detalles_cleaver = [
+                                'D' => [
+                                    'alto' => 'Le apasionan los retos. Puede ser considerado temerario. Siempre listo a la competencia.',
+                                    'bajo' => 'Personas apacibles que buscan la paz y la armonía. Prefieren que otros inicien la acción.'
+                                ],
+                                'I' => [
+                                    'alto' => 'Abierto, persuasivo y sociable. Optimista, puede ver algo bueno en cualquier situación.',
+                                    'bajo' => 'Lógicas y objetivas. Socialmente pasivas, frecuentemente asumen el rol de observador.'
+                                ],
+                                'S' => [
+                                    'alto' => 'Amable, tranquilo y llevadero. Gusta de relaciones cercanas con un grupo pequeño.',
+                                    'bajo' => 'Flexibles y activos. Se sienten cómodos con un alto ritmo de cambios.'
+                                ],
+                                'C' => [
+                                    'alto' => 'Pacífico y adaptable. Sensible, busca apreciación y trata de hacer siempre lo mejor posible.',
+                                    'bajo' => 'Independientes y aventureros. Prefieren campos nuevos y mares desconocidos.'
+                                ]
+                            ];
+                            
+                            foreach (['D', 'I', 'S', 'C'] as $factor):
+                                $puntaje = $resultado[strtolower($factor) . '_total'];
+                                $nivel = $puntaje > 0 ? 'Alto' : 'Bajo';
+                                $signo = $puntaje > 0 ? '+' : '-';
+                            ?>
                                 <tr class="<?php echo $factor == $perfil_dominante ? 'bg-blue-50' : ''; ?>">
                                     <td class="py-3 px-4 border-b font-medium">
                                         <?php echo $descripciones[$factor]['title']; ?> (<?php echo $factor; ?>)
                                     </td>
-                                    <td class="py-3 px-4 border-b"><?php echo $resultado[strtolower($factor) . '_total']; ?></td>
+                                    <td class="py-3 px-4 border-b font-semibold text-<?php echo $nivel == 'Alto' ? 'green' : 'blue'; ?>-600">
+                                        <?php echo $nivel; ?><?php echo $signo; ?>
+                                    </td>
+                                    <td class="py-3 px-4 border-b"><?php echo $puntaje; ?></td>
                                     <td class="py-3 px-4 border-b">
-                                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                            <div class="bg-<?php echo $factor == 'D' ? 'red' : ($factor == 'I' ? 'yellow' : ($factor == 'S' ? 'green' : 'indigo')); ?>-500 h-2.5 rounded-full"
-                                                style="width: <?php echo ${strtolower($factor) . '_percent'}; ?>%"></div>
-                                        </div>
                                         <span class="text-sm text-gray-600"><?php echo ${strtolower($factor) . '_percent'}; ?>%</span>
                                     </td>
                                     <td class="py-3 px-4 border-b text-sm text-gray-600">
-                                        <?php echo $descripciones[$factor]['description']; ?>
+                                        <?php echo $detalles_cleaver[$factor][strtolower($nivel)]; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
