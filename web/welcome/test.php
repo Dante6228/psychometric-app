@@ -32,6 +32,16 @@ $grupos = [];
 foreach ($preguntas as $pregunta) {
     $grupos[$pregunta['grupo_preguntas']][] = $pregunta;
 }
+
+// Verificar si el usuario ya completó el test
+$id_usuario = $_SESSION['id_usuario'];
+$stmt = $conn->prepare("SELECT COUNT(*) FROM respuestas WHERE id_usuario = ?");
+$stmt->execute([$id_usuario]);
+
+if ($stmt->fetchColumn() > 0) {
+    header("Location: ../../web/welcome/welcome.php?message=errTest");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +50,7 @@ foreach ($preguntas as $pregunta) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/output.css">
+    <link rel="stylesheet" href="../../styles/general.css">
     <title>Test Psicométrico CLEAVER</title>
     <style>
         .option-card {

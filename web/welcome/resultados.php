@@ -79,14 +79,15 @@ $mensaje_perfil = $resultado['perfil_ideal'] ?
     "";
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="selection:bg-slate-200">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados Test Cleaver</title>
     <link rel="stylesheet" href="../../styles/output.css">
+    <link rel="stylesheet" href="../../styles/general.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Resultados Test Cleaver</title>
 </head>
 
 <body class="bg-gray-50">
@@ -273,7 +274,7 @@ $mensaje_perfil = $resultado['perfil_ideal'] ?
 
             <!-- Botón de acción -->
             <div class="flex justify-center mt-8">
-                <a href="../../web/welcome/dashboard.php" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">
+                <a href="../../web/welcome/welcome.php" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">
                     Volver
                 </a>
             </div>

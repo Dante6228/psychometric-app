@@ -32,6 +32,6 @@
             <p class="text-center">Después de ejecutar ese comando en terminal, recargar la página con ctrl + shift + r</p>
         </section>
     </main>
-    
+
 </body>
 </html>

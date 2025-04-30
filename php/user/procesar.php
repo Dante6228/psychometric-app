@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: ../../web/welcome/dashboard.php");
                 exit();
             } else {
-                header("Location: ../../web/welcome/test.php");
+                header("Location: ../../web/welcome/welcome.php");
                 exit();
             }
 

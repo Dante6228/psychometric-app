@@ -2,7 +2,7 @@
 
 session_start();
 
-$validMessages = ['errPss', 'errEmail', 'errPost', 'login'];
+$validMessages = ['errPss', 'errEmail', 'errPost', 'login', 'errUser', 'logout'];
 $message = (isset($_GET['message']) && in_array($_GET['message'], $validMessages)) ? $_GET['message'] : null;
 
 $title = '';
@@ -23,8 +23,18 @@ if ($message) {
             break;
         case 'errPost':
             $title = 'Acceso no permitido';
-            $text = 'Debes iniciar sesión desde el formulario.';
+            $text = 'Debes iniciar sesión para acceder.';
             $icon = 'warning';
+            break;
+        case 'errUser':
+            $title = 'Acceso no permitido';
+            $text = 'No tienes los permisos necesarios para acceder.';
+            $icon = 'warning';
+            break;
+        case 'logout':
+            $title = 'Sesión cerrada';
+            $text = 'Has cerrado sesión correctamente.';
+            $icon = 'success';
             break;
     }
 }
