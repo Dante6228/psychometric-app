@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 // Verificar si el usuario completó el test

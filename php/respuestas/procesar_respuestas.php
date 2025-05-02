@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 require_once __DIR__ . '/../conexion.php';
@@ -16,7 +17,7 @@ $conn = $conexion->connection();
 try {
     // Validar que se enviaron respuestas
     if (empty($_POST['respuestas'])) {
-        throw new Exception("No se recibieron respuestas. Por favor completa el test.");
+        throw new UnexpectedValueException("No se recibieron respuestas. Por favor completa el test.");
     }
 
     $conn->beginTransaction();
@@ -27,7 +28,7 @@ try {
     $test = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$test) {
-        throw new Exception("El test CLEAVER no está configurado en el sistema");
+        throw new UnexpectedValueException("El test CLEAVER no está configurado en el sistema");
     }
 
     $id_test = $test['id_test'];
@@ -38,7 +39,7 @@ try {
     $stmt->execute([$id_usuario]);
 
     if ($stmt->fetchColumn() > 0) {
-        throw new Exception("Ya has completado este test anteriormente.");
+        throw new UnexpectedValueException("Ya has completado este test anteriormente.");
     }
 
     // Inicializar contadores DISC
@@ -96,7 +97,7 @@ try {
 
     // Si hay errores, cancelar
     if (!empty($errores)) {
-        throw new Exception(implode("<br>", $errores));
+        throw new UnexpectedValueException(implode("<br>", $errores));
     }
 
     // Calcular resultados finales
@@ -114,12 +115,12 @@ try {
 
     // Determinar perfil dominante
     $perfiles = [
-        'D' => abs($d_total),  // Usamos abs() para obtener la magnitud
+        'D' => abs($d_total),
         'I' => abs($i_total),
         'S' => abs($s_total),
         'C' => abs($c_total)
     ];
-    arsort($perfiles);  // Ordena de mayor a menor según los valores absolutos
+    arsort($perfiles);
     $perfil_dominante = key($perfiles);
 
     // Definir perfil_ideal como booleano (1 o 0)

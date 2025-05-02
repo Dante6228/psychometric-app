@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 $validMessages = ['errTest'];
@@ -8,14 +9,10 @@ $title = '';
 $text = '';
 $icon = '';
 
-if ($message) {
-    switch ($message) {
-        case 'errTest':
-            $title = 'Ya completaste el test';
-            $text = 'No puedes hacer el test dos veces.';
-            $icon = 'error';
-            break;
-    }
+if ($message === 'errTest') {
+    $title = 'Ya completaste el test';
+    $text = 'No puedes hacer el test dos veces.';
+    $icon = 'error';
 }
 
 if (!isset($_SESSION['id_usuario'])) {

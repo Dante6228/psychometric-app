@@ -36,6 +36,11 @@ if ($message) {
             $text = 'Has cerrado sesión correctamente.';
             $icon = 'success';
             break;
+        default:
+            $title = 'Error desconocido';
+            $text = 'Ocurrió un error inesperado.';
+            $icon = 'error';
+            break;
     }
 }
 
