@@ -56,7 +56,7 @@ $descripciones = [
             'Lógicas y objetivas en todo lo que hacen, con frecuencia se acusa a estas personas de no gustar de la gente. El problema no es de sentir atracción o afecto, sino lo que hacen al respecto. Socialmente pasivos, frecuentemente asumen el rol de observador en cualquier ambiente social, incluso ante los conflictos.'
     ],
     'S' => [
-        'title' => 'Constancia',
+        'title' => 'Estabilidad',
         'description' => $resultado['s_total'] > 0 ?
             'Generalmente amable, tranquilo y llevadero. Es poco demostrativo y controlado, ya que no es de naturaleza explosiva de pronta reacción; puede ocultar sus sentimientos y ser rencoroso. Gusta de establecer relaciones amistosas cercanas con un grupo relativamente pequeño de personas.' :
             'Flexibles, variables y activos. Estas personas ponen las cosas en movimiento. La variedad es el condimento de la vida; además, es difícil pegarle a un blanco en constante movimiento. Estas personas se sienten cómodas con un alto ritmo de cambios de actividad y de rutina.'

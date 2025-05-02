@@ -458,7 +458,7 @@ $mensaje_perfil = $estudiante['perfil_ideal'] ?
                                 display: true
                             },
                             suggestedMin: 0,
-                            suggestedMax: 100,
+                            suggestedMax: 40,
                             ticks: {
                                 stepSize: 20,
                                 backdropColor: 'rgba(0, 0, 0, 0)'
