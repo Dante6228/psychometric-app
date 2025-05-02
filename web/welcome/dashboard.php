@@ -19,7 +19,7 @@ $conn = $conexion->connection();
 
 // Obtener lista de estudiantes que han completado el test
 $stmt = $conn->prepare("
-    SELECT u.id_usuario, u.nombre, u.email, r.fecha_resultado, 
+    SELECT u.id_usuario, u.nombre, u.email, r.fecha_resultado,
             r.d_percent, r.i_percent, r.s_percent, r.c_percent,
             r.perfil_dominante
     FROM usuarios u
@@ -50,6 +50,7 @@ $colores = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/output.css">
     <link rel="stylesheet" href="../../styles/general.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard Administrativo</title>
 </head>
@@ -148,10 +149,11 @@ $colores = [
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <a href="detalle_estudiante.php?id=<?php echo $estudiante['id_usuario']; ?>" class="text-blue-600 hover:text-blue-900 mr-3">Ver</a>
-                                        <form action="../../php/user/eliminar_test.php" method="post" class="inline-block">
-                                            <input type="hidden" name="id_usuario" value="<?php echo $estudiante['id_usuario']; ?>">
-                                            <button type="submit" class="text-red-600 hover:text-red-900">Eliminar</button>
-                                        </form>
+                                        <button type="button"
+                                                onclick="confirmarEliminacion(<?php echo $estudiante['id_usuario']; ?>)"
+                                                class="text-red-600 hover:text-red-900">
+                                            Eliminar
+                                        </button>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -219,6 +221,70 @@ $colores = [
                 }
             });
         });
+
+        function confirmarEliminacion(idUsuario) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡Esta acción eliminará todos los resultados del test!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Mostrar loader
+                    Swal.fire({
+                        title: 'Eliminando...',
+                        html: 'Por favor espere',
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    // Enviar por AJAX
+                    fetch('../../php/user/eliminar_test.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `id_usuario=${idUsuario}`
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                title: '¡Eliminado!',
+                                text: data.message,
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then(() => {
+                                if (data.redirect) {
+                                    window.location.href = data.redirect;
+                                } else {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error',
+                                data.message,
+                                'error'
+                            );
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire(
+                            'Error',
+                            'Error en la conexión: ' + error,
+                            'error'
+                        );
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>
