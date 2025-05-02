@@ -78,6 +78,22 @@ $colores = [
 
         <!-- Contenido principal -->
         <main class="flex-grow container mx-auto px-4 py-8">
+
+            <!-- Mostrar mensajes de error o éxito -->
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
+                    <p class="font-bold">Error</p>
+                    <p><?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></p>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['success'])): ?>
+                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
+                    <p class="font-bold">Éxito</p>
+                    <p><?php echo htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?></p>
+                </div>
+            <?php endif; ?>
+
             <div class="mb-8">
                 <h2 class="text-xl font-semibold mb-4">Resumen General</h2>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -102,6 +118,47 @@ $colores = [
                 <div class="bg-white rounded-lg shadow p-6 mb-6">
                     <h3 class="text-lg font-medium mb-4">Distribución de Perfiles</h3>
                     <canvas id="perfilesChart" height="150"></canvas>
+                </div>
+            </div>
+
+            <!-- Sección para crear nuevos alumnos -->
+            <div class="bg-white rounded-lg shadow overflow-hidden mb-8">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h2 class="text-xl font-semibold">Crear Nueva Cuenta de Alumno</h2>
+                </div>
+                <div class="p-6">
+                    <form action="../../php/admin/crear_alumno.php" method="POST" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre completo</label>
+                                <input type="text" id="nombre" name="nombre" required placeholder="Nombre completo"
+                                    class="block w-full p-2 bg-gray-100 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm outline-none">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="email" name="email" required placeholder="Email@correo.com"
+                                    class="block w-full p-2 bg-gray-100 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm outline-none">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="password" class="block text-sm font-medium text-gray-700">Contraseña temporal</label>
+                                <input type="password" id="password" name="password" required placeholder="Contraseña"
+                                    class="block w-full p-2 bg-gray-100 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm outline-none">
+                            </div>
+                            <div>
+                                <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirmar contraseña</label>
+                                <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirmar contraseña"
+                                    class="block w-full p-2 bg-gray-100 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm outline-none">
+                            </div>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="submit"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                Crear Cuenta
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
