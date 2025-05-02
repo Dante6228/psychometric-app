@@ -27,7 +27,9 @@
 ## 📦 Requisitos Previos
 
 - Tener instalado [Docker](https://www.docker.com/)
-- Conexión a internet para descargar contenedores la primera vez
+- Tener instalado [Node.js y NPM](https://nodejs.org/)
+- Tener instalado [Composer](https://getcomposer.org/)
+- Conexión a internet para descargar contenedores y dependencias
 
 ---
 
@@ -40,7 +42,31 @@ git clone https://github.com/Dante6228/psychometric-app.git
 cd psychometric-app
 ```
 
-### 2️⃣ Construir y levantar los contenedores
+### 2️⃣ Instalar dependencias PHP con Composer
+
+```bash
+composer install
+```
+
+> Esto instalará las dependencias necesarias definidas en `composer.json`. Asegúrate de tener Composer instalado y configurado en tu sistema.
+
+### 3️⃣ Instalar dependencias de Node (Tailwind, etc.)
+
+```bash
+npm install
+```
+
+> Esto instalará Tailwind CSS y otras dependencias listadas en `package.json`.
+
+### 4️⃣ Compilar Tailwind CSS
+
+```bash
+npm run dev
+```
+
+> Este comando ejecuta Vite o el build configurado para Tailwind, generando los estilos necesarios. También puedes usar `npm run build` para producción.
+
+### 5️⃣ Construir y levantar los contenedores
 
 ```bash
 docker-compose up --build
@@ -48,7 +74,7 @@ docker-compose up --build
 
 > Esto creará los servicios definidos en `docker-compose.yml` y dejará la aplicación lista para usarse.
 
-### 3️⃣ Acceder desde el navegador
+### 6️⃣ Acceder desde el navegador
 
 ```bash
 http://localhost:8080
@@ -56,7 +82,7 @@ http://localhost:8080
 
 > ⚠️ Asegúrate de que el servidor web y la base de datos estén activos.
 
-### 4️⃣ Detener los contenedores
+### 7️⃣ Detener los contenedores
 
 ```bash
 docker-compose down
@@ -110,20 +136,6 @@ Este proyecto fue desarrollado por estudiantes del grupo **DUAL 601 - CECYTEM Cu
 
 ---
 
-## 🤝 Contribuciones
-
-¿Te gustaría colaborar? ¡Genial!
-
-1. Abre un **issue** con tu propuesta o bug encontrado.
-2. Haz un **fork** del proyecto.
-3. Crea una nueva rama (`git checkout -b feature/nombre`).
-4. Realiza tus cambios y asegúrate de probarlos.
-5. Envía tu **pull request**.
-
-> Por favor, sigue buenas prácticas de desarrollo y mantén el código limpio ✨
-
----
-
 ## 📄 Licencia
 
 Este proyecto está licenciado bajo la **Creative Commons Atribución-NoComercial 4.0 Internacional (CC BY-NC 4.0)**.
@@ -131,12 +143,5 @@ Este proyecto está licenciado bajo la **Creative Commons Atribución-NoComercia
 > Esto significa que puedes **usar, modificar y compartir** el proyecto, **siempre y cuando no lo uses con fines comerciales** y **des el crédito correspondiente** a los autores.
 
 🔗 [https://creativecommons.org/licenses/by-nc/4.0/deed.es](https://creativecommons.org/licenses/by-nc/4.0/deed.es)
-
----
-
-## ⭐ ¡Apóyanos!
-
-Si este proyecto te gustó o te fue útil, considera dejar una ⭐ en GitHub.  
-¡Eso nos motiva a seguir mejorando!
 
 ---
