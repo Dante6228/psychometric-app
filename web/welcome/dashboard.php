@@ -45,6 +45,7 @@ $colores = [
 
 <!DOCTYPE html>
 <html lang="es" class="selection:bg-slate-200">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,6 +55,7 @@ $colores = [
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard Administrativo</title>
 </head>
+
 <body class="bg-gray-50">
     <div class="min-h-screen flex flex-col">
         <!-- Header -->
@@ -63,13 +65,39 @@ $colores = [
                     <h1 class="text-2xl font-bold">Dashboard Administrativo</h1>
                     <div class="flex items-center space-x-4">
                         <span class="text-sm"><?php echo $_SESSION['nombre']; ?></span>
+
+                        <a href="crud_admins.php"
+                            class="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-thin px-4 py-2 rounded-lg transition-colors ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-person-gear" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0" />
+                            </svg>
+                            Administradores
+                        </a>
+
+                        <a href="crud_alumnos.php"
+                            class="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-thin px-4 py-2 rounded-lg transition-colors ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-person-vcard" viewBox="0 0 16 16">
+                                <path
+                                    d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
+                                <path
+                                    d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z" />
+                            </svg>
+                            Usuarios
+                        </a>
                         <form action="../../php/user/cerrar.php" method="post">
-                            <button type="submit" class="flex items-center text-white hover:text-gray-200 transition-colors text-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            <button type="submit"
+                                class="inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-thin px-4 py-2 rounded-lg transition-colors ">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                 </svg>
                                 Cerrar sesión
                             </button>
+
                         </form>
                     </div>
                 </div>
@@ -81,17 +109,17 @@ $colores = [
 
             <!-- Mostrar mensajes de error o éxito -->
             <?php if (isset($_SESSION['error'])): ?>
-                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
-                    <p class="font-bold">Error</p>
-                    <p><?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></p>
-                </div>
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
+                <p class="font-bold">Error</p>
+                <p><?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></p>
+            </div>
             <?php endif; ?>
 
             <?php if (isset($_SESSION['success'])): ?>
-                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
-                    <p class="font-bold">Éxito</p>
-                    <p><?php echo htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?></p>
-                </div>
+            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
+                <p class="font-bold">Éxito</p>
+                <p><?php echo htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?></p>
+            </div>
             <?php endif; ?>
 
             <div class="mb-8">
@@ -102,63 +130,23 @@ $colores = [
                         <div class="text-gray-500 text-sm font-medium">Total de estudiantes</div>
                         <div class="text-3xl font-bold text-blue-600 mt-2"><?php echo $total_estudiantes; ?></div>
                     </div>
-                    
+
                     <!-- Tarjetas de distribución de perfiles -->
                     <?php foreach (['D', 'I', 'S', 'C'] as $perfil): ?>
-                        <div class="bg-white rounded-lg shadow p-6">
-                            <div class="text-gray-500 text-sm font-medium">Perfil <?php echo $perfil; ?></div>
-                            <div class="text-3xl font-bold mt-2 <?php echo $colores[$perfil]; ?> rounded-full w-12 h-12 flex items-center justify-center mx-auto">
-                                <?php echo $distribucion_perfiles[$perfil] ?? 0; ?>
-                            </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="text-gray-500 text-sm font-medium">Perfil <?php echo $perfil; ?></div>
+                        <div
+                            class="text-3xl font-bold mt-2 <?php echo $colores[$perfil]; ?> rounded-full w-12 h-12 flex items-center justify-center mx-auto">
+                            <?php echo $distribucion_perfiles[$perfil] ?? 0; ?>
                         </div>
+                    </div>
                     <?php endforeach; ?>
                 </div>
-                
+
                 <!-- Gráfico de distribución -->
                 <div class="bg-white rounded-lg shadow p-6 mb-6">
                     <h3 class="text-lg font-medium mb-4">Distribución de Perfiles</h3>
                     <canvas id="perfilesChart" height="150"></canvas>
-                </div>
-            </div>
-
-            <!-- Sección para crear nuevos alumnos -->
-            <div class="bg-white rounded-lg shadow overflow-hidden mb-8">
-                <div class="px-6 py-4 border-b border-gray-200">
-                    <h2 class="text-xl font-semibold">Crear Nueva Cuenta de Alumno</h2>
-                </div>
-                <div class="p-6">
-                    <form action="../../php/admin/crear_alumno.php" method="POST" class="space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre completo</label>
-                                <input type="text" id="nombre" name="nombre" required placeholder="Nombre completo"
-                                    class="block w-full p-2 bg-gray-100 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm outline-none">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                <input type="email" id="email" name="email" required placeholder="Email@correo.com"
-                                    class="block w-full p-2 bg-gray-100 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm outline-none">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="password" class="block text-sm font-medium text-gray-700">Contraseña temporal</label>
-                                <input type="password" id="password" name="password" required placeholder="Contraseña"
-                                    class="block w-full p-2 bg-gray-100 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm outline-none">
-                            </div>
-                            <div>
-                                <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirmar contraseña</label>
-                                <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirmar contraseña"
-                                    class="block w-full p-2 bg-gray-100 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm outline-none">
-                            </div>
-                        </div>
-                        <div class="flex justify-end">
-                            <button type="submit"
-                                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                Crear Cuenta
-                            </button>
-                        </div>
-                    </form>
                 </div>
             </div>
 
@@ -171,48 +159,67 @@ $colores = [
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Perfil</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Resultados</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Nombre</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Email</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Fecha</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Perfil</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Resultados</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Acciones</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             <?php foreach ($estudiantes as $estudiante): ?>
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="font-medium text-gray-900"><?php echo htmlspecialchars($estudiante['nombre']); ?></div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-500">
-                                        <?php echo htmlspecialchars($estudiante['email']); ?>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-gray-500">
-                                        <?php echo date('d/m/Y', strtotime($estudiante['fecha_resultado'])); ?>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <?php echo $colores[$estudiante['perfil_dominante']]; ?>">
-                                            <?php echo $estudiante['perfil_dominante']; ?>
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex space-x-1">
-                                            <span class="text-xs font-medium text-red-600">D:<?php echo $estudiante['d_percent']; ?>%</span>
-                                            <span class="text-xs font-medium text-yellow-500">I:<?php echo $estudiante['i_percent']; ?>%</span>
-                                            <span class="text-xs font-medium text-green-600">S:<?php echo $estudiante['s_percent']; ?>%</span>
-                                            <span class="text-xs font-medium text-indigo-600">C:<?php echo $estudiante['c_percent']; ?>%</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="detalle_estudiante.php?id=<?php echo $estudiante['id_usuario']; ?>" class="text-blue-600 hover:text-blue-900 mr-3">Ver</a>
-                                        <button type="button"
-                                                onclick="confirmarEliminacion(<?php echo $estudiante['id_usuario']; ?>)"
-                                                class="text-red-600 hover:text-red-900">
-                                            Eliminar
-                                        </button>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="font-medium text-gray-900">
+                                        <?php echo htmlspecialchars($estudiante['nombre']); ?></div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-500">
+                                    <?php echo htmlspecialchars($estudiante['email']); ?>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-500">
+                                    <?php echo date('d/m/Y', strtotime($estudiante['fecha_resultado'])); ?>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <?php echo $colores[$estudiante['perfil_dominante']]; ?>">
+                                        <?php echo $estudiante['perfil_dominante']; ?>
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex space-x-1">
+                                        <span
+                                            class="text-xs font-medium text-red-600">D:<?php echo $estudiante['d_percent']; ?>%</span>
+                                        <span
+                                            class="text-xs font-medium text-yellow-500">I:<?php echo $estudiante['i_percent']; ?>%</span>
+                                        <span
+                                            class="text-xs font-medium text-green-600">S:<?php echo $estudiante['s_percent']; ?>%</span>
+                                        <span
+                                            class="text-xs font-medium text-indigo-600">C:<?php echo $estudiante['c_percent']; ?>%</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="detalle_estudiante.php?id=<?php echo $estudiante['id_usuario']; ?>"
+                                        class="text-blue-600 hover:text-blue-900 mr-3">Ver</a>
+                                    <button type="button"
+                                        onclick="confirmarEliminacion(<?php echo $estudiante['id_usuario']; ?>)"
+                                        class="text-red-600 hover:text-red-900">
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -230,79 +237,79 @@ $colores = [
 
     <!-- Script para gráficos -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Gráfico de distribución de perfiles
-            const ctx = document.getElementById('perfilesChart').getContext('2d');
-            const chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Dominancia (D)', 'Influencia (I)', 'Estabilidad (S)', 'Cumplimiento (C)'],
-                    datasets: [{
-                        label: 'Cantidad de Estudiantes',
-                        data: [
-                            <?php echo $distribucion_perfiles['D'] ?? 0; ?>,
-                            <?php echo $distribucion_perfiles['I'] ?? 0; ?>,
-                            <?php echo $distribucion_perfiles['S'] ?? 0; ?>,
-                            <?php echo $distribucion_perfiles['C'] ?? 0; ?>
-                        ],
-                        backgroundColor: [
-                            'rgba(239, 68, 68, 0.7)',
-                            'rgba(234, 179, 8, 0.7)',
-                            'rgba(16, 185, 129, 0.7)',
-                            'rgba(99, 102, 241, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(239, 68, 68, 1)',
-                            'rgba(234, 179, 8, 1)',
-                            'rgba(16, 185, 129, 1)',
-                            'rgba(99, 102, 241, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                stepSize: 1
-                            }
-                        }
-                    },
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            display: false
+    document.addEventListener('DOMContentLoaded', function() {
+        // Gráfico de distribución de perfiles
+        const ctx = document.getElementById('perfilesChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Dominancia (D)', 'Influencia (I)', 'Estabilidad (S)', 'Cumplimiento (C)'],
+                datasets: [{
+                    label: 'Cantidad de Estudiantes',
+                    data: [
+                        <?php echo $distribucion_perfiles['D'] ?? 0; ?>,
+                        <?php echo $distribucion_perfiles['I'] ?? 0; ?>,
+                        <?php echo $distribucion_perfiles['S'] ?? 0; ?>,
+                        <?php echo $distribucion_perfiles['C'] ?? 0; ?>
+                    ],
+                    backgroundColor: [
+                        'rgba(239, 68, 68, 0.7)',
+                        'rgba(234, 179, 8, 0.7)',
+                        'rgba(16, 185, 129, 0.7)',
+                        'rgba(99, 102, 241, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(239, 68, 68, 1)',
+                        'rgba(234, 179, 8, 1)',
+                        'rgba(16, 185, 129, 1)',
+                        'rgba(99, 102, 241, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
                         }
                     }
+                },
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
                 }
-            });
+            }
         });
+    });
 
-        function confirmarEliminacion(idUsuario) {
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "¡Esta acción eliminará todos los resultados del test!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Mostrar loader
-                    Swal.fire({
-                        title: 'Eliminando...',
-                        html: 'Por favor espere',
-                        allowOutsideClick: false,
-                        didOpen: () => {
-                            Swal.showLoading();
-                        }
-                    });
+    function confirmarEliminacion(idUsuario) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡Esta acción eliminará todos los resultados del test!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Mostrar loader
+                Swal.fire({
+                    title: 'Eliminando...',
+                    html: 'Por favor espere',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
 
-                    // Enviar por AJAX
-                    fetch('../../php/user/eliminar_test.php', {
+                // Enviar por AJAX
+                fetch('../../php/user/eliminar_test.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
@@ -339,9 +346,10 @@ $colores = [
                             'error'
                         );
                     });
-                }
-            });
-        }
+            }
+        });
+    }
     </script>
 </body>
+
 </html>
