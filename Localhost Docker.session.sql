@@ -59,7 +59,7 @@ INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo)
 VALUES (
         1,
         'Dante',
-        'composer install',
+        'dantealejandro35@gmail.com',
         '$2y$10$Is8ZLcP6WMCH/Jv1242grOR9hCQFEJcBo32TbZE/g.mZo7M94DwXm',
         'administrativo'
     );
