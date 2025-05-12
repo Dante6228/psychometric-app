@@ -143,6 +143,14 @@ VALUES (
         '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
         'alumno'
     );
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo)
+VALUES (
+        12,
+        'Alumno de prueba',
+        'prueba@gmail.com',
+        '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
+        'alumno'
+    );
 INSERT INTO preguntas (
         id_test,
         texto_pregunta,
