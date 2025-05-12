@@ -71,6 +71,78 @@ VALUES (
         '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
         'alumno'
     );
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo)
+VALUES (
+        3,
+        'Alumno',
+        'alumno2@gmail.com',
+        '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
+        'alumno'
+    );
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo)
+VALUES (
+        4,
+        'Alumno',
+        'alumno3@gmail.com',
+        '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
+        'alumno'
+    );
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo)
+VALUES (
+        5,
+        'Alumno',
+        'alumno4@gmail.com',
+        '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
+        'alumno'
+    );
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo)
+VALUES (
+        6,
+        'Alumno',
+        'alumno5@gmail.com',
+        '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
+        'alumno'
+    );
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo)
+VALUES (
+        7,
+        'Alumno',
+        'alumno6@gmail.com',
+        '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
+        'alumno'
+    );
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo)
+VALUES (
+        8,
+        'Alumno',
+        'alumno7@gmail.com',
+        '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
+        'alumno'
+    );
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo)
+VALUES (
+        9,
+        'Alumno',
+        'alumno8@gmail.com',
+        '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
+        'alumno'
+    );
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo)
+VALUES (
+        10,
+        'Alumno',
+        'alumno9@gmail.com',
+        '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
+        'alumno'
+    );
+INSERT INTO usuarios (id_usuario, nombre, email, contraseña_hash, tipo)
+VALUES (
+        11,
+        'Alumno',
+        'alumno10@gmail.com',
+        '$2y$10$iCLKU5JKHvl5x.ExjBSjg.umuDf2ZvXzG4jv.hUgFgU4KCVtm4slq',
+        'alumno'
+    );
 INSERT INTO preguntas (
         id_test,
         texto_pregunta,
@@ -199,3 +271,34 @@ VALUES -- Grupo 1
     (1, 'Devoto', 'C', 24);
 CREATE INDEX idx_respuestas_usuario ON respuestas(id_usuario);
 CREATE INDEX idx_resultados_usuario ON resultados_disc(id_usuario);
+
+INSERT INTO resultados_disc (id_resultado, id_usuario, d_total, d_percent, i_total, i_percent, s_total, s_percent, c_total, c_percent, perfil_dominante, perfil_ideal, fecha_resultado)
+VALUES (1, 2, -14, 28, 14, 28, 3, 6, 19, 38, 'C', 0, '2025-04-04 04:35:55');
+
+INSERT INTO resultados_disc (id_resultado, id_usuario, d_total, d_percent, i_total, i_percent, s_total, s_percent, c_total, c_percent, perfil_dominante, perfil_ideal, fecha_resultado)
+VALUES (2, 3, -18, 25, 17, 23, -20, 27, -18, 25, 'D', 2, '2025-03-17 04:35:55');
+
+INSERT INTO resultados_disc (id_resultado, id_usuario, d_total, d_percent, i_total, i_percent, s_total, s_percent, c_total, c_percent, perfil_dominante, perfil_ideal, fecha_resultado)
+VALUES (3, 4, -10, 17, -13, 22, 17, 28, -20, 33, 'I', 3, '2025-04-01 04:35:55');
+
+INSERT INTO resultados_disc (id_resultado, id_usuario, d_total, d_percent, i_total, i_percent, s_total, s_percent, c_total, c_percent, perfil_dominante, perfil_ideal, fecha_resultado)
+VALUES (4, 5, 1, 7, -12, 28, 18, 43, -5, 22, 'S', 0, '2025-04-17 04:35:55');
+
+INSERT INTO resultados_disc (id_resultado, id_usuario, d_total, d_percent, i_total, i_percent, s_total, s_percent, c_total, c_percent, perfil_dominante, perfil_ideal, fecha_resultado)
+VALUES (5, 6, -19, 28, -4, 6, 2, 3, -12, 63, 'C', 1, '2025-04-08 04:35:55');
+
+INSERT INTO resultados_disc (id_resultado, id_usuario, d_total, d_percent, i_total, i_percent, s_total, s_percent, c_total, c_percent, perfil_dominante, perfil_ideal, fecha_resultado) 
+VALUES (6, 7, 12, 20, -5, 10, 10, 35, -17, 35, 'S', 2, '2025-04-10 11:15:22');
+
+INSERT INTO resultados_disc (id_resultado, id_usuario, d_total, d_percent, i_total, i_percent, s_total, s_percent, c_total, c_percent, perfil_dominante, perfil_ideal, fecha_resultado) 
+VALUES (7, 8, -8, 15, 20, 30, -6, 12, 14, 43, 'C', 1, '2025-04-05 15:42:38');
+
+INSERT INTO resultados_disc (id_resultado, id_usuario, d_total, d_percent, i_total, i_percent, s_total, s_percent, c_total, c_percent, perfil_dominante, perfil_ideal, fecha_resultado) 
+VALUES (8, 9, -11, 20, 16, 25, 2, 5, -7, 50, 'C', 0, '2025-04-02 09:05:10');
+
+INSERT INTO resultados_disc (id_resultado, id_usuario, d_total, d_percent, i_total, i_percent, s_total, s_percent, c_total, c_percent, perfil_dominante, perfil_ideal, fecha_resultado) 
+VALUES (9, 10, 7, 14, 5, 20, -15, 28, 13, 38, 'C', 3, '2025-03-29 17:30:45');
+
+INSERT INTO resultados_disc (id_resultado, id_usuario, d_total, d_percent, i_total, i_percent, s_total, s_percent, c_total, c_percent, perfil_dominante, perfil_ideal, fecha_resultado) 
+VALUES (10, 11, -16, 29, -2, 5, 19, 39, -10, 27, 'S', 2, '2025-04-12 13:12:00');
+
